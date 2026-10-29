@@ -68,6 +68,12 @@
         color: #fff;
         padding: 10px 16px;
         cursor: pointer;
+        border: 0;
+        font: inherit;
+      }
+      .btn:focus-visible {
+        outline: 3px solid #005fcc;
+        outline-offset: 2px;
       }
       #ok {
         color: #2ecc71;
@@ -77,21 +83,25 @@
   </head>
   <body>
     <h1>Napi tünetnapló</h1>
-
-    <fieldset id="tunetek">
-      <legend>Tünetek</legend>
-      <label class="chk"> <input type="checkbox" name="tunet" value="fejfajas" />Fejfájás</label>
-      <label class="chk"> <input type="checkbox" name="tunet" value="hanyinger" />Hányinger</label>
-      <label class="chk"> <input type="checkbox" name="tunet" value="szedules" />Szédülés</label>
-    </fieldset>
-    <label for="eros">Erősség (0–10)</label>
-    <input id="eros" type="number" min="0" max="10"/>
-    <label for="megj">Megjegyzés</label>
-    <textarea id="megj"></textarea>
-    <div class="btn" id="ment">Mentés</div>
+    <form id="naplo">
+      <fieldset id="tunetek">
+        <legend>Tünetek</legend>
+        <label class="chk"> <input type="checkbox" name="tunet" value="fejfajas" />Fejfájás</label>
+        <label class="chk">
+          <input type="checkbox" name="tunet" value="hanyinger" />Hányinger</label
+        >
+        <label class="chk"> <input type="checkbox" name="tunet" value="szedules" />Szédülés</label>
+      </fieldset>
+      <label for="eros">Erősség (0–10)</label>
+      <input id="eros" type="number" min="0" max="10" />
+      <label for="megj">Megjegyzés</label>
+      <textarea id="megj"></textarea>
+      <button type="submit" class="btn" id="ment">Mentés</button>
+    </form>
     <p id="ok"></p>
     <script>
-      document.getElementById('ment').addEventListener('click', function () {
+      document.getElementById('naplo').addEventListener('submit', function (e) {
+        e.preventDefault();
         var eros = document.getElementById('eros');
         var v = Number(eros.value);
         document.getElementById('ok').textContent = '';
