@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Tünetnapló</title>
+    <style>
+      body {
+        font:
+          15px system-ui,
+          sans-serif;
+        background: #fff;
+        color: #222;
+        max-width: 560px;
+        margin: auto;
+        padding: 16px;
+      }
+      .chk {
+        display: inline-block;
+        padding: 8px 12px;
+        border: 1px solid #767676;
+        border-radius: 16px;
+        margin: 4px;
+        cursor: pointer;
+      }
+      .chk.on {
+        background: #0e7c66;
+        color: #fff;
+      }
+      input,
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        font: inherit;
+        border: 1px solid #767676;
+      }
+      .hibas {
+        border: 2px solid #e74c3c;
+      }
+      .btn {
+        display: inline-block;
+        margin-top: 12px;
+        background: #0e7c66;
+        color: #fff;
+        padding: 10px 16px;
+        cursor: pointer;
+      }
+      #ok {
+        color: #2ecc71;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Napi tünetnapló</h1>
+    <h3>Tünetek</h3>
+    <div id="tunetek">
+      <div class="chk" data-v="fejfajas">Fejfájás</div>
+      <div class="chk" data-v="hanyinger">Hányinger</div>
+      <div class="chk" data-v="szedules">Szédülés</div>
+    </div>
+    <h3>Erősség (0–10)</h3>
+    <input id="eros" type="number" min="0" max="10" tabindex="2" />
+    <h3>Megjegyzés</h3>
+    <textarea id="megj" tabindex="1"></textarea>
+    <div class="btn" id="ment">Mentés</div>
+    <p id="ok"></p>
+    <script>
+      document.querySelectorAll('.chk').forEach(function (c) {
+        c.addEventListener('click', function () {
+          c.classList.toggle('on');
+        });
+      });
+      document.getElementById('ment').addEventListener('click', function () {
+        var eros = document.getElementById('eros');
+        var v = Number(eros.value);
+        document.getElementById('ok').textContent = '';
+        if (eros.value === '' || v < 0 || v > 10) {
+          eros.classList.add('hibas');
+          return;
+        }
+        eros.classList.remove('hibas');
+        document.getElementById('ok').textContent = 'Mentve!';
+      });
+    </script>
+  </body>
+</html>
