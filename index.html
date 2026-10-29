@@ -81,7 +81,7 @@
         outline-offset: 2px;
       }
       #ok {
-        color: #2ecc71;
+        color: #085623;
         font-weight: bold;
       }
     </style>
@@ -104,7 +104,7 @@
       <textarea id="megj"></textarea>
       <button type="submit" class="btn" id="ment">Mentés</button>
     </form>
-    <p id="ok"></p>
+    <p id="ok" role="status"></p>
     <script>
       document.getElementById('naplo').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -124,7 +124,7 @@
         eros.removeAttribute('aria-invalid');
         hiba.textContent = '';
         hiba.hidden = true;
-        document.getElementById('ok').textContent = 'Mentve!';
+        document.getElementById('ok').textContent = '✓ Mentve!';
       });
     </script>
   </body>
