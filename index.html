@@ -24,6 +24,11 @@
         font-weight: bold;
         margin-bottom: 4px;
       }
+      label[for] {
+        display: block;
+        font-weight: bold;
+        margin: 16px 0 4px;
+      }
       .chk {
         display: inline-block;
         padding: 8px 12px;
@@ -79,9 +84,9 @@
       <label class="chk"> <input type="checkbox" name="tunet" value="hanyinger" />Hányinger</label>
       <label class="chk"> <input type="checkbox" name="tunet" value="szedules" />Szédülés</label>
     </fieldset>
-    <h3>Erősség (0–10)</h3>
+    <label for="eros">Erősség (0–10)</label>
     <input id="eros" type="number" min="0" max="10" tabindex="2" />
-    <h3>Megjegyzés</h3>
+    <label for="megj">Megjegyzés</label>
     <textarea id="megj" tabindex="1"></textarea>
     <div class="btn" id="ment">Mentés</div>
     <p id="ok"></p>
