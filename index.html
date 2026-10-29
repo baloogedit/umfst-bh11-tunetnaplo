@@ -61,6 +61,11 @@
       .hibas {
         border: 2px solid #e74c3c;
       }
+      .hibauzenet {
+        color: #b3261e;
+        font-weight: bold;
+        margin: 4px 0 0;
+      }
       .btn {
         display: inline-block;
         margin-top: 12px;
@@ -83,7 +88,7 @@
   </head>
   <body>
     <h1>Napi tünetnapló</h1>
-    <form id="naplo">
+    <form id="naplo" novalidate>
       <fieldset id="tunetek">
         <legend>Tünetek</legend>
         <label class="chk"> <input type="checkbox" name="tunet" value="fejfajas" />Fejfájás</label>
@@ -93,7 +98,8 @@
         <label class="chk"> <input type="checkbox" name="tunet" value="szedules" />Szédülés</label>
       </fieldset>
       <label for="eros">Erősség (0–10)</label>
-      <input id="eros" type="number" min="0" max="10" />
+      <input id="eros" type="number" min="0" max="10" aria-describedby="eros-hiba" />
+      <p id="eros-hiba" class="hibauzenet" hidden></p>
       <label for="megj">Megjegyzés</label>
       <textarea id="megj"></textarea>
       <button type="submit" class="btn" id="ment">Mentés</button>
@@ -103,13 +109,21 @@
       document.getElementById('naplo').addEventListener('submit', function (e) {
         e.preventDefault();
         var eros = document.getElementById('eros');
+        var hiba = document.getElementById('eros-hiba');
         var v = Number(eros.value);
         document.getElementById('ok').textContent = '';
         if (eros.value === '' || v < 0 || v > 10) {
           eros.classList.add('hibas');
+          eros.setAttribute('aria-invalid', 'true');
+          hiba.textContent = '⚠ Hiba: Az erősség 0 és 10 közötti szám kell legyen';
+          hiba.hidden = false;
+          eros.focus();
           return;
         }
         eros.classList.remove('hibas');
+        eros.removeAttribute('aria-invalid');
+        hiba.textContent = '';
+        hiba.hidden = true;
         document.getElementById('ok').textContent = 'Mentve!';
       });
     </script>
