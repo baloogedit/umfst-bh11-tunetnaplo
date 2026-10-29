@@ -15,6 +15,15 @@
         margin: auto;
         padding: 16px;
       }
+      fieldset {
+        border: 0;
+        padding: 0;
+        margin: 0 0 12px;
+      }
+      legend {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
       .chk {
         display: inline-block;
         padding: 8px 12px;
@@ -23,9 +32,18 @@
         margin: 4px;
         cursor: pointer;
       }
-      .chk.on {
+      .chk:has(input:checked) {
         background: #0e7c66;
         color: #fff;
+      }
+      .chk:has(input:focus-visible) {
+        outline: 3px solid #005fcc;
+        outline-offset: 2px;
+      }
+      .chk input {
+        display: inline-block;
+        width: auto;
+        margin: 0 4px 0 0;
       }
       input,
       textarea {
@@ -54,12 +72,13 @@
   </head>
   <body>
     <h1>Napi tünetnapló</h1>
-    <h3>Tünetek</h3>
-    <div id="tunetek">
-      <div class="chk" data-v="fejfajas">Fejfájás</div>
-      <div class="chk" data-v="hanyinger">Hányinger</div>
-      <div class="chk" data-v="szedules">Szédülés</div>
-    </div>
+
+    <fieldset id="tunetek">
+      <legend>Tünetek</legend>
+      <label class="chk"> <input type="checkbox" name="tunet" value="fejfajas" />Fejfájás</label>
+      <label class="chk"> <input type="checkbox" name="tunet" value="hanyinger" />Hányinger</label>
+      <label class="chk"> <input type="checkbox" name="tunet" value="szedules" />Szédülés</label>
+    </fieldset>
     <h3>Erősség (0–10)</h3>
     <input id="eros" type="number" min="0" max="10" tabindex="2" />
     <h3>Megjegyzés</h3>
@@ -67,11 +86,6 @@
     <div class="btn" id="ment">Mentés</div>
     <p id="ok"></p>
     <script>
-      document.querySelectorAll('.chk').forEach(function (c) {
-        c.addEventListener('click', function () {
-          c.classList.toggle('on');
-        });
-      });
       document.getElementById('ment').addEventListener('click', function () {
         var eros = document.getElementById('eros');
         var v = Number(eros.value);
